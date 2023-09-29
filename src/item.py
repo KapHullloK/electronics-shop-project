@@ -11,6 +11,12 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+    def __repr__(self):
+        return f"{Item.__name__}('{self._name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self._name}"
+
     def calculate_total_price(self) -> float:
         return self.price * self.quantity
 
@@ -18,11 +24,11 @@ class Item:
         self.price *= self.pay_rate
 
     @property
-    def return_name(self):
+    def set_name(self):
         return self._name
 
-    @return_name.setter
-    def return_name(self, new_name):
+    @set_name.setter
+    def set_name(self, new_name):
         if isinstance(new_name, str):
             self._name = new_name[0:11]
 

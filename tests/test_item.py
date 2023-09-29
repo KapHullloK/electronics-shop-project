@@ -23,10 +23,10 @@ def test_2_hw1():
 
 
 def test_3_hw2():
-    assert item1.return_name == "Смартфон"
+    assert item1.set_name == "Смартфон"
 
-    item1.return_name = "Планшет"
-    assert item1.return_name == "Планшет"
+    item1.set_name = "Планшет"
+    assert item1.set_name == "Планшет"
 
     Item.instantiate_from_csv('../src/items.csv')
     assert len(Item.all) == 7
@@ -39,3 +39,11 @@ def test_4_hw2():
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
     assert Item.string_to_number('2340.567') == 2340
+
+
+def test_5_hw3():
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert str(item1) == 'Планшет'
+    assert repr(item2) == "Item('Ноутбук', 20000, 5)"
+    assert str(item2) == 'Ноутбук'
+    
