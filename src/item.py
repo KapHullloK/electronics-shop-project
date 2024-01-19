@@ -43,7 +43,12 @@ class Item:
     def string_to_number(string):
         return int(string.split('.')[0])
 
+    def __add__(self, other) -> int | None:
+        if isinstance(other, Item) or issubclass(other.__class__, Item):
+            return self.quantity + other.quantity
+        return None
 
-if __name__ == '__main__':
-    Item.instantiate_from_csv("items.csv")
-    print(Item.all[4].quantity)
+
+# if __name__ == '__main__':
+#     Item.instantiate_from_csv("items.csv")
+#     print(Item.all[4].quantity)
