@@ -6,10 +6,15 @@ class Phone(Item):
         super().__init__(_name, price, quantity)
         self.number_of_sim = number_of_sim
 
-    def __add__(self, other) -> int | None:
-        if isinstance(other, Item):
-            return self.quantity + other.quantity
-        return None
+    @property
+    def number_of_sim(self):
+        return self._number_of_sim
+
+    @number_of_sim.setter
+    def number_of_sim(self, number_of_sim: int) -> None:
+        if number_of_sim <= 0:
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
+        self._number_of_sim = number_of_sim
 
     def __repr__(self):
         return f"{Phone.__name__}('{self._name}', {self.price}, {self.quantity}, {self.number_of_sim})"
