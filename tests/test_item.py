@@ -1,5 +1,6 @@
 import pytest
 
+import src.item
 from src.item import Item
 from src.phone import Phone
 
@@ -71,3 +72,13 @@ def test_6_hw4():
 
     assert phone1 + item1 == 25
     assert phone2 + item2 == 12
+
+
+def test_7_hw5():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv("../rc/items.csv")
+
+    assert Item.instantiate_from_csv("../src/items.csv") == None
+
+    # with pytest.raises(src.item.InstantiateCSVError):
+    #     Item.instantiate_from_csv("../src/items.csv")

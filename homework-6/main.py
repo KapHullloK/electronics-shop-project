@@ -6,5 +6,6 @@ if __name__ == '__main__':
     # FileNotFoundError: Отсутствует файл item.csv
 
     # В файле items.csv удалена последняя колонка.
+    # path to file --> "../src/items.csv"
     Item.instantiate_from_csv()
     # InstantiateCSVError: Файл item.csv поврежден

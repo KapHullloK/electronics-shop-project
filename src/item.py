@@ -1,4 +1,5 @@
 import csv
+import os
 
 
 class Item:
@@ -33,7 +34,14 @@ class Item:
             self._name = new_name[0:11]
 
     @classmethod
-    def instantiate_from_csv(cls, path):
+    def instantiate_from_csv(cls, path=""):
+        try:
+            f = CheckCSV(path)
+        except FileNotFoundError as e:
+            raise e
+        except InstantiateCSVError as e:
+            raise e
+
         with open(path, encoding="cp1251") as CSVfile:
             read = csv.DictReader(CSVfile)
             for row in read:
@@ -49,6 +57,22 @@ class Item:
         return None
 
 
-# if __name__ == '__main__':
-#     Item.instantiate_from_csv("items.csv")
-#     print(Item.all[4].quantity)
+class InstantiateCSVError(Exception):
+    def __str__(self):
+        return "Файл item.csv поврежден"
+
+
+class CheckCSV:
+    def __init__(self, f_path: str):
+        if not os.path.exists(f_path):
+            raise FileNotFoundError("Отсутствует файл item.csv")
+
+        with open(f_path) as CSVfile:
+            read = csv.reader(CSVfile)
+            first_row = next(read, None)
+            if first_row is not None:
+                for i in read:
+                    if len(first_row) != len(i):
+                        raise InstantiateCSVError
+            else:
+                raise InstantiateCSVError
